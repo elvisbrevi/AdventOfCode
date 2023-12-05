@@ -11,5 +11,5 @@ fn main() {
         }
     }
 
-    println!("{:?}", floor);
+    println!("The instructions take Santa to floor {} 🏢", floor);
 }
