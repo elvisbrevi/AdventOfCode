@@ -40,5 +40,5 @@ fn main() {
         "They need to order {} square feet of wrapping paper 🎁.",
         total_paper
     );
-    println!("Total ribbon: {}", total_ribbon);
+    println!("We need {} feet of ribbon in total 🎀.", total_ribbon);
 }
