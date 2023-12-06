@@ -2,6 +2,7 @@ mod input;
 
 fn main() {
     let mut total_paper = 0;
+    let mut total_ribbon = 0;
 
     let sizes_string = input::get_sizes();
     let sizes_vec: Vec<&str> = sizes_string.split('\n').collect();
@@ -21,10 +22,23 @@ fn main() {
 
         let smallest_face = areas.iter().min().unwrap() / 2;
         total_paper += areas.iter().sum::<i32>() + smallest_face;
+
+        // perimeter
+        let sizes_sum = sizes_i32.iter().sum::<i32>();
+        let perimeter = 2 * (sizes_sum - sizes_i32.iter().max().unwrap());
+
+        // volume
+        let mut volume = 1;
+        for size in sizes_i32 {
+            volume *= size
+        }
+
+        total_ribbon += volume + perimeter;
     }
 
     println!(
         "They need to order {} square feet of wrapping paper 🎁.",
         total_paper
     );
+    println!("Total ribbon: {}", total_ribbon);
 }
