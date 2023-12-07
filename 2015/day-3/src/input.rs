@@ -3,5 +3,5 @@ pub fn get_input() -> &'static str {
 }
 
 pub fn get_test_input() -> &'static str {
-    "^>v<"
+    "^v^v^v^v^v"
 }
