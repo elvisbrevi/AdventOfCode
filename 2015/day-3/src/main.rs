@@ -20,7 +20,7 @@ fn main() {
     }
 
     println!(
-        "Santa ended up delivering presents to {:?} houses! 🏠🎁",
+        "Santa 🎅 ended up delivering presents 🎁 to {:?} houses 🏠!",
         visited_houses.len()
     );
 }
