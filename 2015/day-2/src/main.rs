@@ -12,13 +12,10 @@ fn main() {
         let sizes_i32_result: Result<Vec<i32>, _> =
             sizes_trimmed.split('x').map(|s| s.parse::<i32>()).collect();
 
-        let sizes_i32 = match sizes_i32_result {
-            Ok(sizes) => sizes,
-            Err(e) => {
-                eprintln!("Error: {}", e);
-                return;
-            }
-        };
+        let mut sizes_i32 = vec![];
+        if let Some(result) = sizes_i32_result.ok() {
+            sizes_i32 = result;
+        }
 
         let areas = vec![
             2 * sizes_i32[0] * sizes_i32[1],
