@@ -1,9 +1,8 @@
 pub fn test_input() -> &'static str {
-    "ugknbfddgicrmopn
-    aaa
-    jchzalrnumimnmhp
-    haegwjzuvuyypxyu
-    dvszwmarrgswjxmb"
+    "qjhvhtzxzqqjkmpb
+    xxyxx
+    uurcxstgmygtbstg
+    ieodomkazucvgmuy"
 }
 
 pub fn input() -> &'static str {
