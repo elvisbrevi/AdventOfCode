@@ -9,10 +9,16 @@ fn main() {
 
     for sizes in sizes_vec {
         let sizes_trimmed = sizes.trim();
-        let sizes_i32: Vec<i32> = sizes_trimmed
-            .split('x')
-            .map(|s| s.parse::<i32>().unwrap())
-            .collect();
+        let sizes_i32_result: Result<Vec<i32>, _> =
+            sizes_trimmed.split('x').map(|s| s.parse::<i32>()).collect();
+
+        let sizes_i32 = match sizes_i32_result {
+            Ok(sizes) => sizes,
+            Err(e) => {
+                eprintln!("Error: {}", e);
+                return;
+            }
+        };
 
         let areas = vec![
             2 * sizes_i32[0] * sizes_i32[1],
@@ -20,12 +26,17 @@ fn main() {
             2 * sizes_i32[2] * sizes_i32[0],
         ];
 
-        let smallest_face = areas.iter().min().unwrap() / 2;
-        total_paper += areas.iter().sum::<i32>() + smallest_face;
+        if let Some(min) = areas.iter().min() {
+            let smallest_face = min / 2;
+            total_paper += areas.iter().sum::<i32>() + smallest_face;
+        }
 
         // perimeter
         let sizes_sum = sizes_i32.iter().sum::<i32>();
-        let perimeter = 2 * (sizes_sum - sizes_i32.iter().max().unwrap());
+        let mut perimeter = 0;
+        if let Some(max) = sizes_i32.iter().max() {
+            perimeter = 2 * (sizes_sum - max);
+        }
 
         // volume
         let mut volume = 1;
