@@ -5,7 +5,7 @@ fn main() {
     loop {
         let md5 = format!("{:?}", md5::compute(format!("{}{}", input, answer)));
 
-        if &md5[..5] == "00000" {
+        if &md5[..6] == "000000" {
             break;
         }
 
