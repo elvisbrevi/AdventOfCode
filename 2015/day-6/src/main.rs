@@ -66,12 +66,10 @@ fn main() {
         do_something(action, &mut lights, from, to);
     }
 
-    let mut count_on = 0;
+    let mut count_on: i32 = 0;
     for x in 0..row_num {
         for y in 0..col_num {
-            if lights[x][y] == 1 {
-                count_on += 1;
-            }
+            count_on += lights[x][y] as i32;
         }
     }
     println!("{} lights are on.", count_on);
