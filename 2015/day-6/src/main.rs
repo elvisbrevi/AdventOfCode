@@ -11,15 +11,13 @@ enum Action {
 impl Action {
     fn execute(&self, state: &mut i8) {
         match self {
-            Action::Toggle => {
-                if *state == 0 {
-                    *state = 1
-                } else {
-                    *state = 0
+            Action::Toggle => *state += 2,
+            Action::TurnOff => {
+                if *state > 0 {
+                    *state -= 1
                 }
             }
-            Action::TurnOff => *state = 0,
-            Action::TurnOn => *state = 1,
+            Action::TurnOn => *state += 1,
         };
     }
 }
