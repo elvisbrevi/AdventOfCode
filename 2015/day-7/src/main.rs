@@ -1,8 +1,8 @@
 mod input;
-use std::collections::{binary_heap, HashMap};
+use std::collections::HashMap;
 
 enum BitwiseOperation {
-    NONE(u16),
+    VAL(u16),
     AND(u16, u16),
     OR(u16, u16),
     LSHIFT(u16, u16),
@@ -11,9 +11,9 @@ enum BitwiseOperation {
 }
 
 impl BitwiseOperation {
-    fn result(&self) -> u16 {
+    fn evaluate(&self) -> u16 {
         match self {
-            BitwiseOperation::NONE(a) => *a,
+            BitwiseOperation::VAL(a) => *a,
             BitwiseOperation::AND(a, b) => a & b,
             BitwiseOperation::OR(a, b) => a | b,
             BitwiseOperation::LSHIFT(a, b) => a << b,
@@ -26,8 +26,10 @@ impl BitwiseOperation {
 fn main() {
     let input = input::get_test_input();
     let mut operations: HashMap<&str, Vec<&str>> = HashMap::new();
+    let binding = input.replace("->", "");
 
-    for operation_string in input.replace("->", "").split("\n") {
+    // reading input
+    for operation_string in binding.split("\n") {
         // divide usefull words in a vector
         let mut words: Vec<&str> = operation_string.trim().split(" ").collect();
         // get the character identifier for wire
@@ -38,11 +40,45 @@ fn main() {
         // save wire and it's bitwise operation in a hasmap
         operations.insert(key, words);
     }
+
+    //excute operation
+    let result = find_value("x", &operations);
+    println!("{}", result)
 }
 
-fn find_value(key: &str, operations: HashMap<&str, Vec<&str>>) -> u16 {
+fn is_numeric(value: &str) -> bool {
+    for v in value.chars() {
+        if !v.is_numeric() {
+            return false;
+        }
+    }
+    true
+}
 
-    if let Some() operations.get(key).
+fn find_value(key: &str, operations: &HashMap<&str, Vec<&str>>) -> u16 {
+    if let Some(op) = &operations.get(key) {
+        match op.as_slice() {
+            [value] => {
+                if is_numeric(value) {
+                    value.parse::<u16>().unwrap()
+                } else {
+                    find_value(value, operations)
+                }
+            }
+            ["NOT", value] => {
+                let value_u16 = if is_numeric(value) {
+                    value.parse::<u16>().unwrap()
+                } else {
+                    find_value(value, operations)
+                };
+                !value_u16
+            }
+            _ => 0, //BitwiseOperation::VAL(0).evaluate(),
+        }
+    } else {
+        0
+    }
+
     // bitwise operation
     /* let operation = match operations.get(key).as_slice() {
         [value] => BitwiseOperation::NONE(value.parse::<u16>().expect("Conversion error")),

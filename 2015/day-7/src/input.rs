@@ -6,7 +6,8 @@ pub fn get_test_input() -> &'static str {
     456 -> y
     x OR y -> e
     y RSHIFT 2 -> g
-    NOT x -> h"
+    NOT x -> h
+    y -> a"
 }
 
 pub fn get_input() -> &'static str {
