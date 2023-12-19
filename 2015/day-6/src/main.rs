@@ -70,7 +70,10 @@ fn main() {
             count_on += lights[x][y] as i32;
         }
     }
-    println!("{} lights are on.", count_on);
+    println!(
+        "The total brightness of all lights combined after following Santa's instructions is {}",
+        count_on
+    );
 }
 
 fn do_something(action: Action, lights: &mut Vec<Vec<i8>>, from: Vec<i32>, to: Vec<i32>) {
