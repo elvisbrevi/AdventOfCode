@@ -14,7 +14,7 @@ pub fn get_input() -> &'static str {
     "NOT dq -> dr
     kg OR kf -> kh
     ep OR eo -> eq
-    44430 -> b
+    3176 -> b
     NOT gs -> gt
     dd OR do -> dp
     eg AND ei -> ej
